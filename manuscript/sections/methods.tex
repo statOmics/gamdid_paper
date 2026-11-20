@@ -1,7 +1,7 @@
 \section{Methods} \label{methods}
 {Below, we first outline the \texttt{gamdid} approach (model equations,
 test statistics and the simultaneous confidence bands are discussed in
-more detail in the Supplementary materials).
+more detail in the Supplemental Data).
 We subsequently describe the covariate adjustment procedure, the datasets,
 the simulation framework and the implementation.
 
@@ -40,8 +40,7 @@ the parameters corresponding to a smooth curve $\beta_{f_c}$
 differ between the groups, i.e. $H_0: \beta_{f_{c_1}} = \beta_{f_{c_2}}$.
 We do this by employing a Wald-type test that builds on the work of Wood \cite{Wald}.
 The resulting p-value, referred to as the GAM p-value, captures any difference in
-distribution between the groups: mean shifts, differences in variance, modality,
-skewness...
+distribution between the groups (e.g., in mean, variance, modality or skewness).
 \\
 \\
 \textbf{Step 3: Combining with a mean-shift test}
@@ -115,4 +114,4 @@ The benchmark simulations are based on protein-level mock data from both the Led
 
 \subsection{Implementation}
 The methods for assessing differential distributions are implemented in the \texttt{gamdid} R package that is publicly available through GitHub (github.com/statOmics/gamdid) and will be submitted to Bioconductor.\\
-\texttt{gamdid} builds upon the CRAN packages \texttt{mgcv} \cite{mgcv} and \texttt{harmonicmeanp} \cite{hmp_package} for fitting generalized additive models and p-value aggregation; and on the R/Bioconductor packages \texttt{stageR} \cite{stager} for stagewise testing and \texttt{msqrob2} for detecting shifts in mean abundance \cite{msqrob}. Specifically, \texttt{mgcv} version 1.9.4, \texttt{harmonicmeanp} version 3.0.1, \texttt{stageR} version 1.32.0 and \texttt{msqrob2} version 1.18.0 were used in R version 4.5.3.
+\texttt{gamdid} builds upon the CRAN packages \texttt{mgcv} \cite{mgcv} and \texttt{harmonicmeanp} \cite{hmp_package} for fitting generalized additive models and p-value aggregation; and on the R/Bioconductor packages \texttt{stageR} \cite{stager} for stagewise testing and \texttt{msqrob2} for detecting shifts in mean abundance \cite{msqrob}. Specifically, \texttt{mgcv} version 1.9.4, \texttt{harmonicmeanp} version 3.0.1, \texttt{stageR} version 1.32.0 and \texttt{msqrob2} version 1.21.2 were used in R version 4.6.0.

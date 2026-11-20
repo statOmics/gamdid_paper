@@ -240,22 +240,22 @@ Scale for x is already present.
 Adding another scale for x, which will replace the existing scale.
 Scale for x is already present.
 Adding another scale for x, which will replace the existing scale.
-No feature is significant at FDR 0.05; confidence bands use the most stringent BH level alpha / 1272 = 3.9e-05.
+No feature is significant at FDR 0.05; confidence bands use the most stringent BH level alpha / 1287 = 3.9e-05.
 Scale for fill is already present.
 Adding another scale for fill, which will replace the existing scale.
 Scale for fill is already present.
 Adding another scale for fill, which will replace the existing scale.
-No feature is significant at FDR 0.05; confidence bands use the most stringent BH level alpha / 1272 = 3.9e-05.
+No feature is significant at FDR 0.05; confidence bands use the most stringent BH level alpha / 1287 = 3.9e-05.
 Scale for fill is already present.
 Adding another scale for fill, which will replace the existing scale.
 Scale for fill is already present.
 Adding another scale for fill, which will replace the existing scale.
-No feature is significant at FDR 0.05; confidence bands use the most stringent BH level alpha / 1272 = 3.9e-05.
+No feature is significant at FDR 0.05; confidence bands use the most stringent BH level alpha / 1287 = 3.9e-05.
 Scale for fill is already present.
 Adding another scale for fill, which will replace the existing scale.
 Scale for fill is already present.
 Adding another scale for fill, which will replace the existing scale.
-No feature is significant at FDR 0.05; confidence bands use the most stringent BH level alpha / 1272 = 3.9e-05.
+No feature is significant at FDR 0.05; confidence bands use the most stringent BH level alpha / 1287 = 3.9e-05.
 Scale for fill is already present.
 Adding another scale for fill, which will replace the existing scale.
 Scale for fill is already present.
@@ -338,22 +338,22 @@ Scale for x is already present.
 Adding another scale for x, which will replace the existing scale.
 Scale for x is already present.
 Adding another scale for x, which will replace the existing scale.
-No feature is significant at FDR 0.05; confidence bands use the most stringent BH level alpha / 1272 = 3.9e-05.
+No feature is significant at FDR 0.05; confidence bands use the most stringent BH level alpha / 1287 = 3.9e-05.
 Scale for fill is already present.
 Adding another scale for fill, which will replace the existing scale.
 Scale for fill is already present.
 Adding another scale for fill, which will replace the existing scale.
-No feature is significant at FDR 0.05; confidence bands use the most stringent BH level alpha / 1272 = 3.9e-05.
+No feature is significant at FDR 0.05; confidence bands use the most stringent BH level alpha / 1287 = 3.9e-05.
 Scale for fill is already present.
 Adding another scale for fill, which will replace the existing scale.
 Scale for fill is already present.
 Adding another scale for fill, which will replace the existing scale.
-No feature is significant at FDR 0.05; confidence bands use the most stringent BH level alpha / 1272 = 3.9e-05.
+No feature is significant at FDR 0.05; confidence bands use the most stringent BH level alpha / 1287 = 3.9e-05.
 Scale for fill is already present.
 Adding another scale for fill, which will replace the existing scale.
 Scale for fill is already present.
 Adding another scale for fill, which will replace the existing scale.
-No feature is significant at FDR 0.05; confidence bands use the most stringent BH level alpha / 1272 = 3.9e-05.
+No feature is significant at FDR 0.05; confidence bands use the most stringent BH level alpha / 1287 = 3.9e-05.
 Scale for fill is already present.
 Adding another scale for fill, which will replace the existing scale.
 Scale for fill is already present.
@@ -370,4 +370,4 @@ There were 50 or more warnings (use warnings() to see the first 50)
 > 
 > proc.time()
    user  system elapsed 
- 74.103   5.415  79.872 
+ 69.322   3.896  72.190 

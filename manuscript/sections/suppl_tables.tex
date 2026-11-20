@@ -1,0 +1,40 @@
+% Supplemental tables (S1, S2, ...)
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\tablename}{Supplemental Table}
+\setcounter{table}{0}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{ccc}
+\hline
+\texttt{msqrob2} & \texttt{gamdid} & \texttt{distinct} \\
+\hline
+0.030\rlap{$^{*}$} & 0.055 & 0.039\rlap{$^{*}$}\\
+0.046\rlap{$^{*}$} & 0.081 & 0.160\\
+0.048\rlap{$^{*}$} & 0.081 & 0.039\rlap{$^{*}$}\\
+0.048\rlap{$^{*}$} & 0.084 & 0.141\\
+0.049\rlap{$^{*}$} & 0.083 & 0.055\\
+0.049\rlap{$^{*}$} & 0.086 & 0.128\\
+\\
+0.149 & 0.090 & 0.035\rlap{$^{*}$}\\
+0.128 & 0.197 & 0.039\rlap{$^{*}$}\\
+\hline
+\end{tabular}
+\caption{\textbf{FDR-adjusted p-values for features detected by msqrob2 and/or distinct but not by gamdid in the spike-in case study} The eight features that are flagged as significant by msqrob2 and/or distinct but not by gamdid are listed with their FDR-adjusted p-values from all three methods. We see that gamdid consistently returns borderline non-significant p-values for the six features detected by msqrob2. In contrast, distinct produces both relatively high and relatively low p-values for these features. This indicates that only gamdid largely preserves the msqrob2 ranking of DA features. Significant FDR-adjusted p-values ($<$ 0.05) are marked with an asterisk (*).}
+\label{tab:only_msqrob2}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{ccc}
+\hline
+\texttt{msqrob2} & \texttt{gamdid} & \texttt{distinct} \\
+\hline
+0.931 & 0.028\rlap{$^{*}$} & 0.499\\
+0.401 & 0.034\rlap{$^{*}$} & 0.067\\
+0.074 & 0.045\rlap{$^{*}$} & 0.073\\
+\hline
+\end{tabular}
+\caption{\textbf{FDR-adjusted p-values for the three features detected exclusively by gamdid in the spike-in case study} The three features uniquely identified as significant by gamdid, with FDR-adjusted p-values from all three methods. Two of the three features receive very high msqrob2 p-values, confirming that these differences do not involve a detectable mean shift and would be entirely missed by any conventional DA approach. Significant FDR-adjusted p-values ($<$ 0.05) are marked with an asterisk (*).}
+\label{tab:only_gamdid}
+\end{table}

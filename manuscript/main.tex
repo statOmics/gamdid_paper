@@ -14,10 +14,33 @@
 %
 % NOTE: The bibliography needs to be compiled using the biber engine.
 %
+% This single file builds four PDFs; `make pdfs` (in gamdid_paper/) selects
+% which one by defining \gamdidpart before \input{main}:
+%   manuscript (default) -> gamdid_manuscript.pdf
+%   figures              -> gamdid_supplemental_figures.pdf
+%   tables               -> gamdid_supplemental_tables.pdf
+%   methods              -> gamdid_supplemental_methods.pdf
+% e.g. pdflatex -jobname=gamdid_supplemental_figures "\def\gamdidpart{figures}\input{main}"
+% Compiling main.tex directly gives the manuscript.
+%
 % The previous LaPreprint version of this manuscript is kept in
 % main_lapreprint.tex.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	WHICH DOCUMENT TO BUILD
+%----------------------------------------------------------------------------------------
+
+\providecommand{\gamdidpart}{manuscript}
+\def\PartFigures{figures}
+\def\PartTables{tables}
+\def\PartMethods{methods}
+
+% xr-hyper must be loaded before hyperref (which the class loads): it imports
+% labels from the other PDFs' .aux files so that cross-document references
+% (e.g. "Supplemental Figure S3") resolve and link to the other PDF.
+\RequirePackage{xr-hyper}
 
 %----------------------------------------------------------------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
@@ -59,7 +82,8 @@
 \usepackage{tabularx}
 \usepackage{longtable}
 \usepackage{csquotes}
-\title{gamdid: generalized additive models \\ for differential distributions in single-cell proteomics experiments} % Article title, use manual lines breaks (\\) to beautify the layout
+\newcommand{\papertitle}{gamdid: generalized additive models \\ for differential distributions in single-cell proteomics experiments} % Article title, use manual lines breaks (\\) to beautify the layout
+\title{\papertitle}
 \author[1]{Lucas Beerland}
 \author[1]{Stijn Vandenbulcke}
 \author[1,2,3]{Christophe Vanderaa}
@@ -85,10 +109,52 @@
 \newcommand{\lc}[1]{\textcolor{orange}{#1}}
 \newcommand{\lieven}[1]{\textcolor{orange}{#1}}
 \newcommand{\lucas}[1]{\textcolor{blue}{#1}}
+
+%----------------------------------------------------------------------------------------
+%	PER-DOCUMENT SETUP (title, running head, imported labels)
+%----------------------------------------------------------------------------------------
+
+% Supplemental PDFs: paper title + subtitle, no abstract
+\newcommand{\supplementtitle}[2]{%
+	\title{\papertitle \\[8pt] {\Large #1}}%
+	\renewcommand{\maketitlehookd}{}%
+	\renewcommand{\runninghead}{gamdid -- #2}%
+}
+
+\ifx\gamdidpart\PartFigures
+	\supplementtitle{Supplemental figures}{Supplemental figures}
+	\externaldocument{gamdid_manuscript}
+\else\ifx\gamdidpart\PartTables
+	\supplementtitle{Supplemental tables}{Supplemental tables}
+	\externaldocument{gamdid_manuscript}
+\else\ifx\gamdidpart\PartMethods
+	\supplementtitle{Supplemental methods: full statistical specification of the gamdid framework}{Supplemental methods}
+	\externaldocument{gamdid_manuscript}
+	\externaldocument{gamdid_supplemental_figures}
+\else
+	\externaldocument{gamdid_supplemental_figures}
+	\externaldocument{gamdid_supplemental_tables}
+	\externaldocument{gamdid_supplemental_methods}
+\fi\fi\fi
+
 \begin{document}
 \linenumbers
 \raggedbottom
 \maketitle % Output the title section
+
+%----------------------------------------------------------------------------------------
+%	SUPPLEMENTAL DATA (separate PDFs)
+%----------------------------------------------------------------------------------------
+
+\ifx\gamdidpart\PartFigures
+	\input{sections/suppl_figures}
+\else\ifx\gamdidpart\PartTables
+	\input{sections/suppl_tables}
+\else\ifx\gamdidpart\PartMethods
+	\input{sections/suppl_methods}
+	\newpage
+	\printbibliography[title={Supplemental references}]
+\else
 
 %----------------------------------------------------------------------------------------
 %	ARTICLE CONTENTS
@@ -103,28 +169,28 @@
 All data used in this manuscript are publicly available; no new
 mass spectrometry data were generated. The Leduc \cite{leduc} and Petrosius
 \cite{petro} datasets were downloaded using the \texttt{scpdata} \cite{scp_paper, scp_replication} package from Bioconductor.
-The \texttt{scpdata} package redistributes pubilicly available SCP data using
-R/BioConductor data containers. The Leduc and Petrosius data were downloaded from
+The \texttt{scpdata} package redistributes publicly available SCP data using
+R/Bioconductor data containers. The Leduc and Petrosius data were downloaded from
 the Slavov laboratory website (\url{https://scp.slavovlab.net/Leduc_et_al_2022})
-and Zenodo (\url{httpps://zenodo.org/records/8146605}), respectively. The raw data
-and quantification data can also be found in the massIVE repositories
-MSV000089159 and MSV000092429.
+and Zenodo (\url{https://zenodo.org/records/8146605}), respectively. The raw data
+and quantification data can also be found in the MassIVE repositories
+MSV000089159 (\url{https://doi.org/10.25345/C5W950S0W}) and
+MSV000092429 (\url{https://doi.org/10.25345/C5DB7W12H}), respectively.
 
 \section{Code Availability}
-All code used to prepare and analyze the datasets and produce the figures of this manuscript is available through GitHub (github.com/statOmics/gamdid).
-Finally, \texttt{gamdid} is published as an open source R-package available through GitHub (github.com/statOmics/gamdid) and will be submitted to Bioconductor.
+All code used to prepare and analyze the datasets and produce the figures of this manuscript is available through GitHub (\url{github.com/statOmics/gamdid_paper}).
+The results in this manuscript were obtained with \texttt{gamdid} version 0.99.0, archived as a GitHub release (\url{https://github.com/statOmics/gamdid/releases/tag/v0.99.0}).
 
 \section{Acknowledgements}
 This work was supported by grants from Ghent University Special Research Fund [BOF20/GOA/023] (S.V., L.C., C.V.), [BOF21/GOA/033] (L.M.) and [BOF/PDO/2025/018] (L.C., C.V.), Research Foundation Flanders [FWO G062219N] (S.V., L.C.), [G071326N] (L.C.), [G010023N, G028821N] (L.M.) and as WOG [W005325N] (L.M. and L.C.), funding from the European Union’s Horizon 2020 Program [101080544 and 101191739] (L.M.).
 
-\newpage
-
-\input{sections/supplementary}
 %----------------------------------------------------------------------------------------
 %	 REFERENCES
 %----------------------------------------------------------------------------------------
 \newpage
 
 \printbibliography % Output the bibliography
+
+\fi\fi\fi
 %----------------------------------------------------------------------------------------
 \end{document}

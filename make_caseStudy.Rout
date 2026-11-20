@@ -1,0 +1,4410 @@
+
+R version 4.6.0 (2026-04-24) -- "Because it was There"
+Copyright (C) 2026 The R Foundation for Statistical Computing
+Platform: aarch64-apple-darwin23
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library("here")
+here() starts at /Users/lucasbeerland/Library/CloudStorage/OneDrive-UGent/projecten/gamdid/final/gamdid_paper
+> source(here("R", "packages.R"))
+Loading required package: QFeatures
+Loading required package: MultiAssayExperiment
+Loading required package: SummarizedExperiment
+Loading required package: MatrixGenerics
+Loading required package: matrixStats
+
+Attaching package: ‘MatrixGenerics’
+
+The following objects are masked from ‘package:matrixStats’:
+
+    colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,
+    colCounts, colCummaxs, colCummins, colCumprods, colCumsums,
+    colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,
+    colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,
+    colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,
+    colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,
+    colWeightedMeans, colWeightedMedians, colWeightedSds,
+    colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,
+    rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,
+    rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,
+    rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,
+    rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,
+    rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,
+    rowWeightedMads, rowWeightedMeans, rowWeightedMedians,
+    rowWeightedSds, rowWeightedVars
+
+Loading required package: GenomicRanges
+Loading required package: stats4
+Loading required package: BiocGenerics
+Loading required package: generics
+
+Attaching package: ‘generics’
+
+The following objects are masked from ‘package:base’:
+
+    as.difftime, as.factor, as.ordered, intersect, is.element, setdiff,
+    setequal, union
+
+
+Attaching package: ‘BiocGenerics’
+
+The following objects are masked from ‘package:stats’:
+
+    IQR, mad, sd, var, xtabs
+
+The following objects are masked from ‘package:base’:
+
+    anyDuplicated, aperm, append, as.data.frame, basename, cbind,
+    colnames, dirname, do.call, duplicated, eval, evalq, Filter, Find,
+    get, grep, grepl, is.unsorted, lapply, Map, mapply, match, mget,
+    order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+    rbind, Reduce, rownames, sapply, saveRDS, table, tapply, unique,
+    unsplit, which.max, which.min
+
+Loading required package: S4Vectors
+
+Attaching package: ‘S4Vectors’
+
+The following object is masked from ‘package:utils’:
+
+    findMatches
+
+The following objects are masked from ‘package:base’:
+
+    expand.grid, I, unname
+
+Loading required package: IRanges
+Loading required package: Seqinfo
+Loading required package: Biobase
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+
+Attaching package: ‘Biobase’
+
+The following object is masked from ‘package:MatrixGenerics’:
+
+    rowMedians
+
+The following objects are masked from ‘package:matrixStats’:
+
+    anyMissing, rowMedians
+
+
+Attaching package: ‘QFeatures’
+
+The following object is masked from ‘package:base’:
+
+    sweep
+
+Loading required package: ExperimentHub
+Loading required package: AnnotationHub
+Loading required package: BiocFileCache
+Loading required package: dbplyr
+
+Attaching package: ‘AnnotationHub’
+
+The following object is masked from ‘package:Biobase’:
+
+    cache
+
+
+This is scpdata version 1.20.0.
+Use 'scpdata()' to list available data sets.
+
+Attaching package: ‘patchwork’
+
+The following object is masked from ‘package:cowplot’:
+
+    align_plots
+
+
+Attaching package: ‘dplyr’
+
+The following objects are masked from ‘package:dbplyr’:
+
+    ident, sql
+
+The following object is masked from ‘package:Biobase’:
+
+    combine
+
+The following objects are masked from ‘package:GenomicRanges’:
+
+    intersect, setdiff, union
+
+The following object is masked from ‘package:Seqinfo’:
+
+    intersect
+
+The following objects are masked from ‘package:IRanges’:
+
+    collapse, desc, intersect, setdiff, slice, union
+
+The following objects are masked from ‘package:S4Vectors’:
+
+    first, intersect, rename, setdiff, setequal, union
+
+The following objects are masked from ‘package:BiocGenerics’:
+
+    combine, intersect, setdiff, setequal, union
+
+The following object is masked from ‘package:generics’:
+
+    explain
+
+The following object is masked from ‘package:matrixStats’:
+
+    count
+
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+
+Attaching package: ‘tidyr’
+
+The following object is masked from ‘package:S4Vectors’:
+
+    expand
+
+
+Attaching package: ‘msqrob2’
+
+The following object is masked from ‘package:gamdid’:
+
+    topFeatures
+
+Loading required package: nlme
+
+Attaching package: ‘nlme’
+
+The following object is masked from ‘package:dplyr’:
+
+    collapse
+
+The following object is masked from ‘package:IRanges’:
+
+    collapse
+
+This is mgcv 1.9-4. For overview type '?mgcv'.
+
+Attaching package: ‘stageR’
+
+The following object is masked from ‘package:methods’:
+
+    getMethod
+
+Loading required package: FMStable
+Registered S3 method overwritten by 'car':
+  method           from
+  na.action.merMod lme4
+
+Attaching package: ‘ggpubr’
+
+The following object is masked from ‘package:cowplot’:
+
+    get_legend
+
+Warning messages:
+1: package ‘S4Vectors’ was built under R version 4.6.1 
+2: package ‘ggplot2’ was built under R version 4.6.1 
+3: package ‘ggpubr’ was built under R version 4.6.1 
+> 
+> # Load in dataset
+> leduc <- readRDS(here("data", "leduc.rds"))
+> 
+> sce_leduc <- getWithColData(leduc, "proteinSweep")
+> leduc_filtered <- sce_leduc[,sce_leduc$MelanomaSubCluster %in% "A" | sce_leduc$SampleType == "Monocyte"]
+> 
+> id_melA <- which(leduc_filtered$SampleType == "Melanoma")
+> id_mon <- which(leduc_filtered$SampleType == "Monocyte")
+> 
+> # construct 2 mock groups out of the Monocytes
+> set.seed(1234)
+> idX <- sample(id_mon, size = length(id_mon)/2)
+> idY <- setdiff(id_mon, idX)
+> 
+> # add some of the Melanoma A cells to group Y to introduce signal
+> set.seed(123456)
+> id_spikein <- sample(id_melA, size = length(id_melA)*0.1)
+> 
+> leduc_filtered$group <- NA
+> leduc_filtered$group[idX] <- "X"
+> leduc_filtered$group[idY] <- "Y"
+> leduc_filtered$group[id_spikein] <- "Y"
+> names_spikein <- colnames(leduc_filtered)[id_spikein]
+> 
+> leduc_case <- leduc_filtered[,which(!is.na(leduc_filtered$group))]
+> 
+> leduc_case_mock_temp <- leduc_filtered[,-id_spikein]
+> leduc_case_mock <- leduc_case_mock_temp[,which(!is.na(leduc_case_mock_temp$group))]
+> 
+> # DD analysis
+> leduc_case_gamdid <- compDistr(object = leduc_case, covariate = "group", minObs = 50)
+Warning message:
+the ‘findbars’ function has moved to the reformulas package. Please update your imports, or ask an upstream package maintainer to do so. 
+> 
+> ### Mock analysis
+> leduc_case_mock_gamdid <- compDistr(object = leduc_case_mock, covariate = "group", minObs = 50)
+> 
+> # DE analysis
+> keeprows <- apply(assay(leduc_case), 1, function(x) all(tapply(!is.na(x), colData(leduc_case)[["group"]], sum) > 50))
+> 
+> leduc_case_msqrob <- msqrob(leduc_case[keeprows,],
++                             formula= ~ group, modelColumnName = "msqrobModel")
+> L <- makeContrast("groupY = 0",
++                   parameterNames = names(getCoef(rowData(leduc_case_msqrob)$msqrobModel[[7]])))
+> leduc_case_msqrob <- hypothesisTest(leduc_case_msqrob, contrast = L,
++                                     modelColumn = "msqrobModel", overwrite=TRUE)
+> 
+> # distinct
+> sce_distinct <- leduc_case[keeprows,]
+> idX <- which(sce_distinct$group == "X")
+> idY <- which(sce_distinct$group == "Y")
+> names(assays(sce_distinct)) <- "logcounts"
+> colData(sce_distinct)$cluster_id <- "cluster1"
+> sample_v <- vector(mode = "character", length = ncol(sce_distinct))
+> sample_v[idX] <- "groupX"; sample_v[idY] <- "groupY"
+> colData(sce_distinct)$sample_id <- sample_v
+> model <- model.matrix(~unique(colData(sce_distinct)[["group"]]))
+> rownames(model) <- unique(sample_v)
+> 
+> library(distinct)
+> # distinct uses permutation tests: fix the seed right before the loop so the
+> # p-values do not depend on random numbers drawn earlier in the script
+> #set.seed(12345)
+> set.seed(12345)
+> v0 <- rep(NA, nrow(sce_distinct))
+> pDis <- data.frame(gene = v0, cluster_id = v0, p_val = v0, p_adj.loc = v0, p_adj.glb = v0, filtered = v0)
+> for (i in 1:nrow(sce_distinct)){
++   idNotNA <- which(!is.na(assay(sce_distinct[i,])))
++   pDis_i <- distinct_test(sce_distinct[i,idNotNA], "logcounts",
++                           name_cluster = "cluster_id", name_sample = "sample_id", design = model, min_non_zero_cells = 0)
++   pDis[i,] <- pDis_i
++ }
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+2 groups of samples provided
+Data loaded, starting differential testing
+Differential testing completed, returning results
+> 
+> 
+> pDis_pval <- pDis$p_val
+> names(pDis_pval) <- pDis$gene
+> pAdjDis <- p.adjust(p = pDis_pval, method = "fdr")
+> 
+> saveRDS(object = leduc_case_gamdid, here("caseStudy_results", "leduc_case_gamdid"))
+> saveRDS(object = leduc_case_mock_gamdid, here("caseStudy_results", "leduc_case_mock_gamdid"))
+> saveRDS(object = leduc_case_msqrob, here("caseStudy_results", "leduc_case_msqrob"))
+> saveRDS(object = pAdjDis, here("caseStudy_results", "leduc_case_distinct"))
+> saveRDS(object = names_spikein, here("caseStudy_results", "names_spikein"))
+> 
+> 
+> # generate p values of the features only picked up msqrob2
+> 
+> DA_features <- rowData(leduc_case_msqrob)$groupY %>%
++   filter(adjPval < 0.05) %>%
++   rownames_to_column() %>%
++   pull(rowname)
+> DD_features <- as.data.frame(rowData(leduc_case_gamdid)) %>%
++   filter(groupX_VS_groupY < 0.05) %>%
++   rownames_to_column() %>%
++   pull(rowname)
+> 
+> rowData(leduc_case_msqrob)$groupY[setdiff(DA_features, DD_features),]
+             logFC         se       df         t        pval    adjPval
+Q99497  0.14267032 0.04389364 160.5055  3.250365 0.001404365 0.03029745
+Q96AG4  0.09883778 0.03236838 375.9552  3.053529 0.002422692 0.04875312
+P49773  0.10493885 0.03431872 727.6802  3.057773 0.002311588 0.04769505
+Q04941 -0.19546074 0.06314259 269.9315 -3.095545 0.002171202 0.04608551
+O43149  0.15273906 0.05018350 571.3992  3.043611 0.002445065 0.04875312
+P11388 -0.11913372 0.03893446 565.0056 -3.059853 0.002319516 0.04769505
+> rowData(leduc_case_gamdid)[setdiff(DA_features, DD_features),"groupX_VS_groupY"]
+[1] 0.05519990 0.08379362 0.08147570 0.08147570 0.08697962 0.08509692
+> 
+> rowData(leduc_case_msqrob)$groupY[setdiff(DD_features, DA_features),]
+             logFC         se       df         t        pval    adjPval
+P22392  0.12453937 0.04330251 321.2221  2.876031 0.004296208 0.07439223
+P30740 -0.06714487 0.03814905 520.4845 -1.760067 0.078983850 0.40085956
+Q9BQ61  0.02115257 0.07538228 319.8983  0.280604 0.779195543 0.93073817
+> rowData(leduc_case_gamdid)[setdiff(DD_features, DA_features),"groupX_VS_groupY"]
+[1] 0.04567346 0.03417148 0.02782824
+> 
+> 
+> # Compute execution times
+> # library(microbenchmark)
+> #
+> # microbenchmark(
+> #   method1 = compDistr(object = leduc_case, covariate = "group", minObs = 50),
+> #   method2 = lapply(1:nrow(sce_distinct), function(i){
+> #     idNotNA <- which(!is.na(assay(sce_distinct[i,])))
+> #     pDis_i <- distinct_test(sce_distinct[i,idNotNA], "logcounts",
+> #                             name_cluster = "cluster_id", name_sample = "sample_id", design = model, min_non_zero_cells = 0)
+> #   }),
+> #   times = 10L
+> # )
+> 
+> # Record R and package versions in the .Rout file
+> sessionInfo()
+R version 4.6.0 (2026-04-24)
+Platform: aarch64-apple-darwin23
+Running under: macOS Tahoe 26.5
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.6/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.1
+
+locale:
+[1] C.UTF-8/UTF-8/C.UTF-8/C/C.UTF-8/C.UTF-8
+
+time zone: Europe/Brussels
+tzcode source: internal
+
+attached base packages:
+[1] grid      stats4    stats     graphics  grDevices utils     datasets 
+[8] methods   base     
+
+other attached packages:
+ [1] UpSetR_1.4.1                ggpubr_1.0.0               
+ [3] harmonicmeanp_3.0.1         FMStable_0.1-4             
+ [5] stageR_1.34.0               mgcv_1.9-4                 
+ [7] nlme_3.1-169                msqrob2_1.21.2             
+ [9] gamdid_0.99.0               distinct_1.24.0            
+[11] tibble_3.3.1                tidyr_1.3.2                
+[13] dplyr_1.2.1                 patchwork_1.3.2            
+[15] cowplot_1.2.0               ggplot2_4.0.4              
+[17] scp_1.22.0                  scpdata_1.20.0             
+[19] ExperimentHub_3.2.0         AnnotationHub_4.2.0        
+[21] BiocFileCache_3.2.0         dbplyr_2.5.2               
+[23] QFeatures_1.22.0            MultiAssayExperiment_1.38.0
+[25] SummarizedExperiment_1.42.0 Biobase_2.72.0             
+[27] GenomicRanges_1.64.0        Seqinfo_1.2.0              
+[29] IRanges_2.46.0              S4Vectors_0.50.3           
+[31] BiocGenerics_0.58.1         generics_0.1.4             
+[33] MatrixGenerics_1.24.0       matrixStats_1.5.0          
+[35] here_1.0.2                 
+
+loaded via a namespace (and not attached):
+  [1] RColorBrewer_1.1-3          magrittr_2.0.5             
+  [3] estimability_2.0.0          ggbeeswarm_0.7.3           
+  [5] nloptr_2.2.1                farver_2.1.2               
+  [7] vctrs_0.7.3                 minqa_1.2.8                
+  [9] memoise_2.0.1               rstatix_1.1.0              
+ [11] BiocBaseUtils_1.14.2        S4Arrays_1.12.1            
+ [13] curl_8.1.0                  broom_1.0.13               
+ [15] BiocNeighbors_2.6.0         Formula_1.2-6              
+ [17] SparseArray_1.12.3          plyr_1.8.9                 
+ [19] httr2_1.2.2                 cachem_1.1.0               
+ [21] igraph_2.3.4                lifecycle_1.0.5            
+ [23] iterators_1.0.14            pkgconfig_2.0.3            
+ [25] rsvd_1.0.5                  Matrix_1.7-5               
+ [27] R6_2.6.1                    fastmap_1.2.0              
+ [29] rbibutils_2.4.1             clue_0.3-68                
+ [31] digest_0.6.39               fdrtool_1.2.18             
+ [33] AnnotationDbi_1.74.0        rprojroot_2.1.1            
+ [35] scater_1.40.2               irlba_2.3.7                
+ [37] lpsymphony_1.40.0           RSQLite_3.53.1             
+ [39] beachmat_2.28.0             filelock_1.0.3             
+ [41] httr_1.4.9                  abind_1.4-8                
+ [43] compiler_4.6.0              rngtools_1.5.2             
+ [45] bit64_4.8.6                 withr_3.0.3                
+ [47] doParallel_1.0.17           backports_1.5.1            
+ [49] S7_0.2.2                    BiocParallel_1.46.0        
+ [51] carData_3.0-6               viridis_0.6.5              
+ [53] DBI_1.3.0                   ggsignif_0.6.4             
+ [55] MASS_7.3-65                 rappdirs_0.3.4             
+ [57] DelayedArray_0.38.2         tools_4.6.0                
+ [59] vipor_0.4.7                 otel_0.3.0                 
+ [61] beeswarm_0.4.0              glue_1.8.1                 
+ [63] cluster_2.1.8.2             reshape2_1.4.5             
+ [65] gtable_0.3.6                car_3.1-5                  
+ [67] BiocSingular_1.28.0         ScaledMatrix_1.20.0        
+ [69] metapod_1.20.0              XVector_0.52.0             
+ [71] ggrepel_0.9.8               BiocVersion_3.23.1         
+ [73] foreach_1.5.2               pillar_1.11.1              
+ [75] stringr_1.6.0               limma_3.68.5               
+ [77] splines_4.6.0               lattice_0.22-9             
+ [79] bit_4.6.0                   tidyselect_1.2.1           
+ [81] SingleCellExperiment_1.34.0 Biostrings_2.80.2          
+ [83] scuttle_1.22.0              reformulas_0.4.4           
+ [85] gridExtra_2.3.1             ProtGenerics_1.44.0        
+ [87] IHW_1.40.0                  statmod_1.5.2              
+ [89] stringi_1.8.9               lazyeval_0.2.3             
+ [91] yaml_2.3.12                 boot_1.3-32                
+ [93] codetools_0.2-20            nipals_1.0                 
+ [95] MsCoreUtils_1.24.0          BiocManager_1.30.27        
+ [97] cli_3.6.6                   Rdpack_2.6.6               
+ [99] Rcpp_1.1.2                  png_0.1-9                  
+[101] parallel_4.6.0              assertthat_0.2.1           
+[103] blob_1.3.0                  doRNG_1.8.6.3              
+[105] AnnotationFilter_1.36.0     lme4_2.1-0                 
+[107] viridisLite_0.4.3           slam_0.1-55                
+[109] scales_1.4.0                purrr_1.2.2                
+[111] crayon_1.5.3                rlang_1.3.0                
+[113] KEGGREST_1.52.0            
+> 
+> proc.time()
+   user  system elapsed 
+173.873   3.907 173.832 
